@@ -8,7 +8,7 @@ There are TONS of online tutorials on how to code many simple and sophisticated 
 3. **Get help, but do your own work** - Get help from other students, but others aren't allowed to do your project for you.
 4. **Commit regularly** - Commit your code to GitHub at the end of every coding session so that the evolution of your code is visible.
 
-- [ ] I confirm that I have read the above academic honesty guidelines and understand that not following them leads to school disciplinary action.
+- [x] I confirm that I have read the above academic honesty guidelines and understand that not following them leads to school disciplinary action.
 
 ## 📝 Works Cited
 
