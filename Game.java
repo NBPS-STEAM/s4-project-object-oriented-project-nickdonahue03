@@ -5,7 +5,7 @@ class Game {
 
   public Scanner Input = new Scanner(System.in);
   private ArrayList<Player> Profiles = new ArrayList<Player>();
-  private ArrayList<Board> Boards = new ArrayList<Board>();
+  private ArrayList<gameBoard> Boards = new ArrayList<gameBoard>();
 
   public Game() {
     clearScreen();
@@ -63,32 +63,36 @@ class Game {
     System.out.println("Match Creation\n");
     System.out.println("Enter an profile's number: (ex. 1, 2, ...)");
 
+    // load all available profiles to the screen.
     for (int i = 0; i < Profiles.size(); i++) {
       System.out.println((i+1) + ". " + Profiles.get(i).getName());
     }
 
     System.out.println("8. return to the main menu\n");
     System.out.println("Select Player 1: (ex. 1, 2, ...)\n");
-    int matchCoice1 = Input.nextInt();
+    int matchChoice1 = Input.nextInt();
     int matchChoice2;
 
-    if (matchCoice1 == 8) { // return to the menu
+    // verify player choices
+    if (matchChoice1 == 8) { // return to the menu
       runMenu();
-    } else if (matchCoice1 >= 1 && matchCoice1 <= (Profiles.size() + 1)) {
+    } else if (matchChoice1 >= 1 && matchChoice1 <= (Profiles.size() + 1)) {
       System.out.println("Select Player 2: (ex. 1, 2, ...)\n");
       matchChoice2 = Input.nextInt(); 
-      if (matchCoice1 == 8) { // return to the menu
+      if (matchChoice2 == 8) { // return to the menu
         runMenu();
-      } else if (matchCoice1 >= 1 && matchCoice1 <= (Profiles.size() + 1)) {
-        //
+      } else if (matchChoice2 >= 1 && matchChoice2 <= (Profiles.size() + 1)) {
+        gameBoard newBoard = new gameBoard(Profiles.get(matchChoice1 - 1), Profiles.get(matchChoice2 - 1));
+        Boards.add(newBoard);
+        newBoard.run();
+        pause(5000);
+        runMenu();        
       } else {
         runBoard();
       }
     } else {
       runBoard();
     }
-
-    Board gameBoard = new Board(Profiles.get(matchCoice1 - 1), Profiles.get(matchCoice2 - 1));
   }
 
   private void runProfileCreation() {
@@ -98,14 +102,14 @@ class Game {
   private void runViewProfiles() {
     runMenu();
   }
-
+  
   public void Run() {
   }
   /*
     clearScreen();
     https://stackoverflow.com/questions/2979383/java-clear-the-console
   */
-  public static void clearScreen() {  
+  private static void clearScreen() {  
       System.out.print("\033[H\033[2J");  
       System.out.flush();  
   }  
@@ -114,7 +118,7 @@ class Game {
     pause();
     https://stackoverflow.com/questions/24104313/how-do-i-make-a-delay-in-java
   */
-  public static void pause(int ms) {
+  private static void pause(int ms) {
     try {
         Thread.sleep(ms);
     } catch (InterruptedException e) {
