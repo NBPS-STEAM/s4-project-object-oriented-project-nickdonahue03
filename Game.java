@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 class Game {
 
-  public Scanner Input = new Scanner(System.in);
+  public Scanner Input = new Scanner(System.in); // come up with a better way to have one global Scanner
   private ArrayList<Player> Profiles = new ArrayList<Player>();
   private ArrayList<gameBoard> Boards = new ArrayList<gameBoard>();
 
@@ -82,11 +82,14 @@ class Game {
       if (matchChoice2 == 8) { // return to the menu
         runMenu();
       } else if (matchChoice2 >= 1 && matchChoice2 <= (Profiles.size() + 1)) {
+
         gameBoard newBoard = new gameBoard(Profiles.get(matchChoice1 - 1), Profiles.get(matchChoice2 - 1));
         Boards.add(newBoard);
+        // run the game
         newBoard.run();
-        pause(5000);
-        runMenu();        
+        pause(5000); // return to the main menu in 5 seconds
+        runMenu();  
+
       } else {
         runBoard();
       }
